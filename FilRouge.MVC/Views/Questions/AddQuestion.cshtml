@@ -1,0 +1,18 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+
+@{
+	ViewBag.Title = "AddQuestion";
+}
+
+<h2>Ajouter une question</h2>
+@using (Html.BeginForm())
+{
+	@Html.EditorFor(m => m)
+
+	<div class="form-group">
+		<div class="col-md-offset-2 Col-md-10">
+			<input type="submit" value="Ajouter" class="btn-default" />
+		</div>
+
+	</div>
+}

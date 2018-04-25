@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FilRouge.MVC.ViewModels.QuestionViewModel>
+
+@{
+    ViewBag.Title = "Questions";
+}
+
+<h2>QuestionsList</h2>
+@Html.AntiForgeryToken()
+<p>
+    @Html.ActionLink("Create New", "AddQuestion")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commentaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Technology.TechnoName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionType.NameType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Difficulty.DifficultyName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commentaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Technology.TechnoName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionType.NameType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.QuestionId })
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+        </td>
+    </tr>
+    }
+
+</table>

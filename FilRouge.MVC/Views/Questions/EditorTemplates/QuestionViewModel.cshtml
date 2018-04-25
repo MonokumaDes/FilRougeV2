@@ -1,0 +1,38 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.HiddenFor(m => m.QuestionId)
+    </div>
+</div>
+<table>
+    <tr>
+        <td>@Html.Label("Technologie : ")</td>
+        <td>@Html.DropDownListFor(m => m.Technology.TechnoId, (List<SelectListItem>)ViewBag.Technologies, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.Technology.TechnoId)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Type de la question : ")</td>
+        <td>@Html.DropDownListFor(m => m.QuestionType.TypeQuestionId, (List<SelectListItem>)ViewBag.QuestionType, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.QuestionType.TypeQuestionId)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Difficulté : ")</td>
+        <td>@Html.DropDownListFor(m => m.Difficulty.DifficultyId, (List<SelectListItem>)ViewBag.Difficulties, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.Difficulty.DifficultyId)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Content)</td>
+        <td>@Html.EditorFor(m => m.Content)</td>
+        <td>@Html.ValidationMessageFor(m => m.Content)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Commentaire)</td>
+        <td>@Html.EditorFor(m => m.Commentaire)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Active)</td>
+        <td>@Html.CheckBoxFor(m => m.Active)</td>
+        <td>@Html.ValidationMessageFor(m => m.Active)</td>
+    </tr>
+</table>

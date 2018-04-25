@@ -1,0 +1,26 @@
+﻿@model FilRouge.MVC.ViewModels.DifficultyViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Difficulty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DifficultyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DifficultyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DifficultyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

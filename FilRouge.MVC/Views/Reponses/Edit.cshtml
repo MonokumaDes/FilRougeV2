@@ -1,0 +1,35 @@
+﻿@model List<FilRouge.MVC.ViewModels.ReponseViewModel>
+@{
+    ViewBag.Title = "Edition des réponses";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Question id = @ViewBag.Question.QuestionId</div>
+    <div class="panel-body">
+        Intitulé de la question : @ViewBag.Question.Content
+        <br />
+        <small>Commentaire de la question : @ViewBag.Question.Commentaire</small>
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "Reponses", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < ViewBag.Question.Reponses.Count; i++)
+    {
+        @Html.EditorFor(m => m[i])
+    }
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Valider" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}

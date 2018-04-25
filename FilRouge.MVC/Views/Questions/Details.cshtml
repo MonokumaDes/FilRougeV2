@@ -1,0 +1,40 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details question n°@Model.QuestionId</h2>
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm())
+{
+<table>
+    <tr>
+        <td>@Html.LabelFor(m => m.Content)</td>
+        <td>@Html.DisplayFor(m => m.Content)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Commentaire : ")</td>
+        <td>@Html.DisplayFor(m => m.Commentaire)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Technologie : ")</td>
+        <td>@Html.DisplayFor(m => m.Technology.TechnoName)
+    <tr>
+        <td>@Html.Label("QuestionType : ")</td>
+        <td>@Html.DisplayFor(m => m.QuestionType.NameType)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Difficulté : ")</td>
+        <td>@Html.DisplayFor(m => m.Difficulty.DifficultyName)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Active : ")</td>
+        <td>@Html.DisplayFor(m => m.Active)</td>
+    </tr>
+</table>
+}
+
+@Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
+@Html.ActionLink("Back to List", "Questions")

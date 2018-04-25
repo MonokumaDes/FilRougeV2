@@ -1,0 +1,78 @@
+﻿@model FilRouge.MVC.ViewModels.ContactViewModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.OldRoleId)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<!--
+<div class="form-group">
+    @*
+    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>*@
+</div>-->
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    
+    @if (ViewBag.ModeEdition)
+    {
+        <label class="control-label col-md-2" for="Password">Nouveau Mot de passe</label>
+    }
+    else
+    {
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+    }
+
+    <div class="col-md-10">
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(m => m.RoleId, (List<SelectListItem>)ViewBag.Roles, "Selectionnez un role")
+        @Html.ValidationMessageFor(m => m.RoleId, "", new { @class = "text-danger" })
+    </div>
+</div>
+<!--
+
+<div class="form-group">
+    @*
+    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+    </div>9*@
+</div>
+ -->

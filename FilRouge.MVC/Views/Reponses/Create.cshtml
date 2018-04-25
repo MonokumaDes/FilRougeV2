@@ -1,0 +1,34 @@
+﻿@model FilRouge.MVC.ViewModels.ReponseViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Ajout des réponses pour la question</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Question id = @ViewBag.Question.QuestionId</div>
+    <div class="panel-body">
+        Intitulé de la question : @ViewBag.Question.Content
+        <br />
+        <small>Commentaire de la question : @ViewBag.Question.Commentaire</small>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "Reponses", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < 4; i++)
+    {
+        @Html.EditorFor(m => m)
+    }
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Créer les réponses" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+
+}

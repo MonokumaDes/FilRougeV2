@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FilRouge.MVC.Entities.DifficultyRate>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DifficultyMaster.DifficultyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Difficulty.DifficultyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DifficultyMaster.DifficultyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { idMaster = item.DifficultyMasterId, id = item.DifficultyId }) |
+                @Html.ActionLink("Details", "Details", new { idMaster = item.DifficultyMasterId, id = item.DifficultyId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,19 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+@{
+    ViewBag.Title = "EditQuestion";
+}
+<h2>Edition d'une question</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorFor(m => m)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 Col-md-10">
+            <input type="submit" value="Modifier" class="btn-default" />
+        </div>
+    </div>
+}
+@Html.ActionLink("Back to List", "Questions") | 
+@Html.ActionLink("Modifier les réponses", "Edit/" + Model.QuestionId, "Reponses")

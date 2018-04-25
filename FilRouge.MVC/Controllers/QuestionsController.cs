@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using FilRouge.MVC.Entities;
+using FilRouge.MVC.Models;
 using FilRouge.MVC.Services;
 using FilRouge.MVC.ViewModels;
 
@@ -47,8 +48,9 @@ namespace FilRouge.MVC.Controllers
 			if (ModelState.IsValid)
 			{
 				Id = _questionService.AddQuestion(questionViewModel);
-                var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionType.TypeQuestionId);
-                if (typeQuestion.NameType.ToLower() != "choix libre")
+                //var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionType.TypeQuestionId);
+                //if (typeQuestion.NameType.ToLower() != "choix libre")
+                if (questionViewModel.AnswerType == AnswerTypeEnum.ChoixUnique || questionViewModel.AnswerType == AnswerTypeEnum.ChoixMultiple)
                 {
                     return RedirectToAction("Create", "Reponses", new { id = Id });
                 }

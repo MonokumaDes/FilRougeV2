@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FilRouge.MVC.Entities;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.ViewModels.Maps;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 
 namespace FilRouge.MVC.Services
 {

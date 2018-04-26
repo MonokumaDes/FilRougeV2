@@ -38,8 +38,8 @@ namespace FilRouge.Web.Controllers
                 Reponses reponse = new Reponses
                 {
                     QuestionId = question.QuestionId,
-                    Content = collection.GetValue("[" + i + "].Reponse" + reponses[i].ReponseId + i).AttemptedValue,
-                    TrueReponse = collection.GetValue("[" + i + "].BonneReponse" + reponses[i].ReponseId + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
+                    Content = collection.GetValue("[" + i + "].Reponse"+ i).AttemptedValue,
+                    TrueReponse = collection.GetValue("[" + i + "].BonneReponse" + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
                 };
                 if(reponse.Content != "")
                     reponses.Add(reponse);

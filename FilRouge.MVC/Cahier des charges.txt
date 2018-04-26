@@ -6,7 +6,7 @@
 	- Création et édition d'un quiz - A FINIR (Création faite, édition à faire)
 	- Visualisation des détails du quiz (résultats) - PAS FAIT
 	- Ecran de connexion - FAIT
-	- Passage du quiz technique - EN COURS
+	- Passage du quiz technique - EN COURS ***
 	- Présentation des résultats (mail, pdf, page web) - PAS FAIT
 
 Hébergement :
@@ -16,9 +16,9 @@ Hébergement :
 
 Remarques :
 
-	- Titre des pages
-	- Boutons d'éditions
-	- Utiliser les enums pour les types de réponses
-	- Utiliser les templates
-	- Edition des réponses
+	- Titre des pages - A FAIRE
+	- Boutons d'éditions - A FAIRE
+	- Utiliser les enums pour les types de réponses - FAIT
+	- Utiliser les templates - FAIT
+	- Edition des réponses - FAIT
 

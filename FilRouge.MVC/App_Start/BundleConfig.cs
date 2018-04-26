@@ -14,9 +14,12 @@ namespace FilRouge.MVC
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Utilisez la version de développement de Modernizr pour le développement et l'apprentissage. Puis, une fois
-            // prêt pour la production, utilisez l'outil de génération à l'adresse https://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+			bundles.Add(new ScriptBundle("~/bundles/jqueryAjax").Include(
+					   "~/Scripts/jquery.unobtrusive-ajax*"));
+
+			// Utilisez la version de développement de Modernizr pour le développement et l'apprentissage. Puis, une fois
+			// prêt pour la production, utilisez l'outil de génération à l'adresse https://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
+			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

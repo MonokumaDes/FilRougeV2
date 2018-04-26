@@ -1,0 +1,63 @@
+﻿@model FilRouge.MVC.ViewModels.QuizzViewModel
+@section scripts {
+
+	@Scripts.Render("~/bundles/jqueryAjax")
+	@Scripts.Render("~/bundles/jquery")
+
+}
+
+
+@{
+	ViewBag.Title = "Test";
+	//FilRouge.MVC.ViewModels.QuestionViewModel question = ViewBag.QuestionListByQuizz;
+	//FilRouge.MVC.ViewModels.ReponseViewModel reponse = ViewBag.ReponseByQuestionId;
+
+	@**@
+}
+
+<h2>Test</h2>
+<div class="row">
+	<div class="col-md-4">
+		@Html.HiddenFor(m => m.QuizzId)
+		<h1> Verification</h1>
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.NomUser)
+		@Html.DisplayFor(m => m.NomUser)
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.PrenomUser)
+		@Html.DisplayFor(m => m.PrenomUser)
+	</div>
+	@using (Ajax.BeginForm("QuestionQuizz", "Quizz", new { quizzId = Model.QuizzId }, new AjaxOptions
+	{ HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AffichageQuestionId" }))
+	{
+		<div id="AffichageQuestionId"> Cliquez sur suivant pour commencer le test</div>
+		<input type="submit" value="Suivant" />
+	}
+
+
+	<div id="AffichageQuestionId"> Cliquez sur suivant pour commencer le test</div>
+</div>
+
+@*@using (Html.BeginForm("QuestionQuizz", "Quizz", null, FormMethod.Post, new { id = Model.QuizzId }))
+	{
+		<a href="javascript:document.getElementById(Model.QuizzId).submit(Model.QuizzId)" class="btn"></a>
+	}*@
+
+@*<script>
+		$('.btn').click(clickMe);
+
+		function clickMe(event) {
+			event.preventDefault();
+			$("#AffichageQuestionId").load(
+				$(this).attr("data-url"),
+				{ 'paramKey': 1 },
+				function (response, status, xhr)
+				{
+
+				}
+			);
+		}
+	</script>*@
+

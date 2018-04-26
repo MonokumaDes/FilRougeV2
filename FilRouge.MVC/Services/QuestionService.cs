@@ -102,6 +102,28 @@ namespace FilRouge.MVC.Services
 
 			return questionViewModels;
 		}
+		/// <summary>
+		/// Retourne la liste des questions d'un Quizz
+		///** En_cours**
+		/// </summary>
+		/// <param name="quizzId"></param>
+		/// <returns></returns>
+		public List<QuestionViewModel> GetQuestionsByQuizzId(int quizzId)
+		{
+			var questionViewModels = new List<QuestionViewModel>();
+
+			using (var dbContext = new FilRougeDBContext())
+			{
+				var questionEntities = dbContext.Quizz.Find(quizzId).Questions;
+
+				foreach (var question in questionEntities)
+				{
+					questionViewModels.Add(question.MapToQuestionsViewModel());
+				}
+			}
+
+			return questionViewModels;
+		}
 
 		public int AddReponsesToQuestion(int id ,List<Reponses> reponses)
 		{

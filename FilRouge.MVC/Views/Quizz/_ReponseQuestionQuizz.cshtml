@@ -1,0 +1,39 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+@{
+	ViewBag.Title = "_ReponseQuestionQuizz";
+}
+@Html.HiddenFor(m => m.QuestionId)
+@*@Html.DisplayFor(m => m.QuestionViewModel.Content)*@
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-4">
+			@*@Html.LabelFor(m => m.QuestionViewModel)*@
+			@Html.DisplayFor(m => m.Content)
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			@Html.LabelFor(m => m.Commentaire)
+			@Html.EditorFor(m => m.Commentaire)
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			@foreach (var reponse in Model.Reponses)
+			{
+			<div class="panel panel-primary">
+				<div style="padding:15px;">
+					@Html.Label("Reponse" + reponse.Content, (string)reponse.Content)
+					@Html.CheckBox("BonneReponse"+ reponse.ReponseId)
+					<br />
+				</div>
+			</div>
+			}
+		</div>
+	</div>
+</div>
+@*<script type="text/javascript" language=javascript>
+	$.validator.unobtrusive.parse(AffichageQuestionId);
+</script>*@

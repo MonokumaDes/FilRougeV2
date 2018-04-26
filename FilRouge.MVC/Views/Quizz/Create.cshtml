@@ -1,2 +1,16 @@
 ﻿@model FilRouge.MVC.ViewModels.QuizzViewModel
+@{
+	ViewBag.Title = "Create";
+}
 
+@using (Html.BeginForm())
+{
+	@Html.EditorFor(m => m)
+
+	<div class="form-group">
+		<div class="col-md-offset-2 Col-md-10">
+			<input type="submit" value="Ajouter" class="btn-default" />
+		</div>
+
+	</div>
+}

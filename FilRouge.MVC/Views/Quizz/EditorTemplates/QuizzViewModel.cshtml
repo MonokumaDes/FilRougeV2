@@ -1,1 +1,48 @@
-﻿
+﻿@model FilRouge.MVC.ViewModels.QuizzViewModel
+
+@{
+	ViewBag.Title = "QuizzViewModel";
+}
+
+<div class="row">
+	<div class="col-md-4">
+		@Html.HiddenFor(m => m.QuizzId)
+		<h1> Verification</h1>
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.NomUser)
+		@Html.EditorFor(m => m.NomUser)
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.PrenomUser)
+		@Html.EditorFor(m => m.PrenomUser)
+	</div>
+
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.QuestionLibre)
+		@Html.ValidationMessageFor(m => m.QuestionLibre)
+		@Html.CheckBoxFor(m => m.QuestionLibre)
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.NombreQuestion)
+		@Html.EditorFor(m => m.NombreQuestion)
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.EtatQuizz)
+		@Html.EditorFor(m => m.EtatQuizz)
+	</div>
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.Timer)
+		@Html.EditorFor(m => m.Timer)
+	</div>
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.DifficultyId, (List<SelectListItem>)ViewBag.Difficulties, "Selectionnez une difficulté")
+		@Html.ValidationMessageFor(m => m.DifficultyId)
+	</div>
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.TechnologyId, (List<SelectListItem>)ViewBag.Technologies, "Selectionnez une Technologie")
+		@Html.ValidationMessageFor(m => m.TechnologyId)
+	</div>
+</div>
+
+

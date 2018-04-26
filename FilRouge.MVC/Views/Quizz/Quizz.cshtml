@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FilRouge.MVC.ViewModels.QuizzViewModel>
+
+@{
+	ViewBag.Title = "Quizz";
+}
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<h2>Quizz</h2>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.QuizzId)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NomUser)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.PrenomUser)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.QuestionLibre)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NombreQuestion)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TechnologyId)
+		</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.QuizzId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NomUser)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.PrenomUser)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.QuestionLibre)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NombreQuestion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.TechnologyId)
+			</td>
+			<td>
+
+				@*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+		@Html.ActionLink("Details", "Details", new { id = item.QuestionId })
+		@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+		@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+			</td>
+		</tr>
+	}
+
+</table>

@@ -1,6 +1,6 @@
 ﻿@model FilRouge.MVC.ViewModels.ReponseViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Création des réponses";
 }
 
 <h2>Ajout des réponses pour la question</h2>
@@ -20,7 +20,7 @@
 
     for (int i = 0; i < 4; i++)
     {
-        @Html.EditorFor(m => m)
+        @Html.EditorFor(m => m, new { i = i })
     }
 
     <div class="row">

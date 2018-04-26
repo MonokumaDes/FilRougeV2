@@ -20,6 +20,7 @@ namespace FilRouge.Web.Controllers
         {
             var question = _questionService.GetQuestion(id);
             ViewBag.Question = question;
+            //var reponsesList = new List<ReponseViewModel>();
             return View(new ReponseViewModel());
         }
 
@@ -38,8 +39,8 @@ namespace FilRouge.Web.Controllers
                 Reponses reponse = new Reponses
                 {
                     QuestionId = question.QuestionId,
-                    Content = collection.GetValue("[" + i + "].Reponse"+ i).AttemptedValue,
-                    TrueReponse = collection.GetValue("[" + i + "].BonneReponse" + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
+                    Content = collection.GetValue("Reponse0"+ i).AttemptedValue,
+                    TrueReponse = collection.GetValue("BonneReponse0" + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
                 };
                 if(reponse.Content != "")
                     reponses.Add(reponse);

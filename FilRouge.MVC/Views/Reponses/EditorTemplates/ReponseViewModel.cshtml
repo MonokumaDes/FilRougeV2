@@ -3,9 +3,9 @@
 <div class="panel panel-primary">
     <div style="padding:15px;">
         @Html.Label("Réponse", htmlAttributes: new { @class = "control-label" })
-        @Html.TextBox("Reponse" + Model.ReponseId, (string)Model.Content, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBox("Reponse" + Model.ReponseId + ViewData["i"], (string)Model.Content, htmlAttributes: new { @class = "control-label" })
         <br />
         @Html.Label("Bonne réponse? ", htmlAttributes: new { @class = "control-label" })
-        @Html.CheckBox("BonneReponse" + Model.ReponseId, (bool)Model.TrueReponse)
+        @Html.CheckBox("BonneReponse" + Model.ReponseId + ViewData["i"], (bool)Model.TrueReponse)
     </div>
 </div>

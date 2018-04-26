@@ -1,0 +1,24 @@
+﻿Fonctionnalités attendues :
+	- Création et édition de Technologies - FAIT
+	- Création et édition de niveau d'expériences - FAIT
+	- Création et édition de questions - FAIT
+	- Création et édition de niveau de questions (réponses) - FAIT
+	- Création et édition d'un quiz - A FINIR (Création faite, édition à faire)
+	- Visualisation des détails du quiz (résultats) - PAS FAIT
+	- Ecran de connexion - FAIT
+	- Passage du quiz technique - EN COURS
+	- Présentation des résultats (mail, pdf, page web) - PAS FAIT
+
+Hébergement :
+	- Hébergement Azure - PAS FAIT
+	- Accessible sur mobile (Android) - PAS FAIT
+
+
+Remarques :
+
+	- Titre des pages
+	- Boutons d'éditions
+	- Utiliser les enums pour les types de réponses
+	- Utiliser les templates
+	- Edition des réponses
+

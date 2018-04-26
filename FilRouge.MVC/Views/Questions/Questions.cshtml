@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<FilRouge.MVC.ViewModels.QuestionViewModel>
-
+@using System.Reflection;
+@using FilRouge.MVC.Models;
 @{
     ViewBag.Title = "Questions";
 }
@@ -33,32 +34,35 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Commentaire)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Technology.TechnoName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionType.NameType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.QuestionId })
-            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commentaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technology.TechnoName)
+            </td>
+            <td>
+                @{
+                    var nameTypeQuest = item.AnswerType.GetDisplayName();
+                    @nameTypeQuest
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuestionId })
+                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            </td>
+        </tr>
     }
 
 </table>

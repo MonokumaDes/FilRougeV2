@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FilRouge.MVC.Entities;
+using FilRouge.MVC.Models;
 
 namespace FilRouge.MVC.ViewModels.Maps
 {
@@ -28,9 +29,10 @@ namespace FilRouge.MVC.ViewModels.Maps
                 QuestionType = question.TypeQuestion,
                 Technology = question.Technology,
                 Difficulty = question.Difficulty,
-                Reponses = question.Reponses.ToList()
+                Reponses = question.Reponses.ToList(),
 				//TODO	Rajouter difficultiesID quand pret
-			};
+                AnswerType = (AnswerTypeEnum)question.QuestionTypeId
+            };
 			return questionsViewModel;
 
 		}
@@ -52,8 +54,9 @@ namespace FilRouge.MVC.ViewModels.Maps
 				Commentaire = questionsViewModel.Commentaire,
 				Active = questionsViewModel.Active,
 				TechnologyId = questionsViewModel.Technology.TechnoId,
-				QuestionTypeId = questionsViewModel.QuestionType.TypeQuestionId,
-				DifficultyId = questionsViewModel.Difficulty.DifficultyId,
+                //QuestionTypeId = questionsViewModel.QuestionType.TypeQuestionId,
+                QuestionTypeId = (int)questionsViewModel.AnswerType,
+                DifficultyId = questionsViewModel.Difficulty.DifficultyId,
                 Reponses = questionsViewModel.Reponses
 			};
 			return question;

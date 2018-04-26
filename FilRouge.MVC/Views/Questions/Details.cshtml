@@ -1,4 +1,6 @@
 ﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+@using System.Reflection;
+@using FilRouge.MVC.Models;
 
 @{
     ViewBag.Title = "Details";
@@ -9,31 +11,34 @@
 
 @using (Html.BeginForm())
 {
-<table>
-    <tr>
-        <td>@Html.LabelFor(m => m.Content)</td>
-        <td>@Html.DisplayFor(m => m.Content)</td>
-    </tr>
-    <tr>
-        <td>@Html.Label("Commentaire : ")</td>
-        <td>@Html.DisplayFor(m => m.Commentaire)</td>
-    </tr>
-    <tr>
-        <td>@Html.Label("Technologie : ")</td>
-        <td>@Html.DisplayFor(m => m.Technology.TechnoName)
-    <tr>
-        <td>@Html.Label("QuestionType : ")</td>
-        <td>@Html.DisplayFor(m => m.QuestionType.NameType)</td>
-    </tr>
-    <tr>
-        <td>@Html.Label("Difficulté : ")</td>
-        <td>@Html.DisplayFor(m => m.Difficulty.DifficultyName)</td>
-    </tr>
-    <tr>
-        <td>@Html.Label("Active : ")</td>
-        <td>@Html.DisplayFor(m => m.Active)</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.Content)</td>
+            <td>@Html.DisplayFor(m => m.Content)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Commentaire : ")</td>
+            <td>@Html.DisplayFor(m => m.Commentaire)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Technologie : ")</td>
+            <td>@Html.DisplayFor(m => m.Technology.TechnoName)
+        </tr>
+        <tr>
+            <td>@Html.Label("QuestionType : ")</td>
+            <td>
+                @Html.DisplayName(Model.AnswerType.GetDisplayName())
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Difficulté : ")</td>
+            <td>@Html.DisplayFor(m => m.Difficulty.DifficultyName)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Active : ")</td>
+            <td>@Html.DisplayFor(m => m.Active)</td>
+        </tr>
+    </table>
 }
 
 @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |

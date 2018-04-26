@@ -1,4 +1,5 @@
 ﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+@using FilRouge.MVC.Models;
 
 <div class="row">
     <div class="col-md-4">
@@ -13,8 +14,10 @@
     </tr>
     <tr>
         <td>@Html.Label("Type de la question : ")</td>
-        <td>@Html.DropDownListFor(m => m.QuestionType.TypeQuestionId, (List<SelectListItem>)ViewBag.QuestionType, "Sélectionnez : ")</td>
-        <td>@Html.ValidationMessageFor(m => m.QuestionType.TypeQuestionId)</td>
+        <td>
+            @Html.EnumDropDownListFor(m => m.AnswerType, "Sélectionnez : ")
+        </td>
+        <td>@Html.ValidationMessageFor(m => m.AnswerType)</td>
     </tr>
     <tr>
         <td>@Html.Label("Difficulté : ")</td>

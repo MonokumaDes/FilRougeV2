@@ -71,7 +71,8 @@ namespace FilRouge.MVC.Services
 				question.Content = questionViewModel.Content;
 				question.Active = questionViewModel.Active;
 				question.DifficultyId = questionViewModel.Difficulty.DifficultyId;
-                question.QuestionTypeId = questionViewModel.QuestionType.TypeQuestionId;
+                //question.QuestionTypeId = questionViewModel.QuestionType.TypeQuestionId;
+                question.QuestionTypeId = (int)questionViewModel.AnswerType;
 				question.TechnologyId = questionViewModel.Technology.TechnoId;
 
 				dbContext.Entry(question).State = EntityState.Modified;

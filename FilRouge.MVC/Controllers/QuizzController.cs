@@ -17,12 +17,9 @@ namespace FilRouge.MVC.Controllers
 		private readonly ReferencesService _referencesService = new ReferencesService();
 		private readonly DifficultyServices _difficultyServices = new DifficultyServices();
 		private readonly TechnologiesService _technologiesService = new TechnologiesService();
+        private readonly ContactService _contactService = new ContactService();
 
 		// GET: Quizz
-		public ActionResult Index()
-		{
-			return View();
-		}
 		public ActionResult Quizz()
 		{
 			var quizzs = _quizzService.GetAllQuizz();
@@ -40,9 +37,11 @@ namespace FilRouge.MVC.Controllers
 
 			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
 			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
+            var contactListItem = _contactService.GetListItemContact();
 
 			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
+            ViewBag.Contact = contactListItem;
 
 			return View(new QuizzViewModel());
 		}
@@ -61,18 +60,19 @@ namespace FilRouge.MVC.Controllers
 			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
 
-
 			var masterID = 1;
 			if (ModelState.IsValid)
 			{
+                quizzViewModel.EtatQuizz = 0;
+                quizzViewModel.Timer = 0;
 				var quizz = _quizzService.CreateQuizz(quizzViewModel, masterID);
-				//return RedirectToAction("Index", "Home");
+				return RedirectToAction("Quizz", "Quizz");
 			}
 
 			return View(quizzViewModel);
 		}
 
-			[HttpGet]
+		[HttpGet]
 		public ActionResult Test(int id)
 		{
 			QuizzViewModel quizz = _quizzService.GetQuizz(id);
@@ -140,5 +140,26 @@ namespace FilRouge.MVC.Controllers
 			// retourner le viewModel qui contient une reponse par l'id de la question
 			return PartialView("_ReponseQuestionQuizz", nextQuestion);
 		}
+
+        [HttpGet]
+        public ActionResult Edit(int quizzId)
+        {
+            var quizz = _quizzService.GetQuizz(quizzId);
+
+            return View(quizz);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(QuizzViewModel quizzViewModel)
+        {
+
+            if(ModelState.IsValid)
+            {
+                _quizzService.EditQuizz(quizzViewModel);
+                return RedirectToAction("Quizz", "Quizz");
+            }
+            return View(quizzViewModel);
+        }
+
 	}
 }

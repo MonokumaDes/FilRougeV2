@@ -50,6 +50,10 @@ namespace FilRouge.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(difficultyRate.Rate > 1)
+                {
+                    difficultyRate.Rate = difficultyRate.Rate / 100;
+                }
                 db.DifficultyRates.Add(difficultyRate);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +87,10 @@ namespace FilRouge.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (difficultyRate.Rate > 1)
+                {
+                    difficultyRate.Rate = difficultyRate.Rate / 100;
+                }
                 db.Entry(difficultyRate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

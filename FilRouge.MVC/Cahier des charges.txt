@@ -3,7 +3,7 @@
 	- Création et édition de niveau d'expériences - FAIT
 	- Création et édition de questions - FAIT
 	- Création et édition de niveau de questions (réponses) - FAIT
-	- Création et édition d'un quiz - A FINIR (Création faite, édition à faire)
+	- Création et édition d'un quiz - FAIT
 	- Visualisation des détails du quiz (résultats) - PAS FAIT
 	- Ecran de connexion - FAIT
 	- Passage du quiz technique - EN COURS ***
@@ -21,4 +21,8 @@ Remarques :
 	- Utiliser les enums pour les types de réponses - FAIT
 	- Utiliser les templates - FAIT
 	- Edition des réponses - FAIT
+	- Difficulty Rates, gérer les décimales. - FAIT
+	- Quizz, gérer la redirection après la création d'un quizz. - FAIT
+	- Quizz, ajouter le bouton Commencer le Quizz. - FAIT
+	- Mettre une virgule au lieu de mettre un point sur la création/édition de DifficultyRate. Requiert JS, Ajax ou Angular ?
 

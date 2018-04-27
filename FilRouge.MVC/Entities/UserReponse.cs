@@ -17,6 +17,8 @@ namespace FilRouge.MVC.Entities
         [ForeignKey("Reponse")]
         public int ReponseId { get; set; }
         public string Valeur { get; set; }
+        public string Commentaire { get; set; }
+        public bool EstRepondu { get; set; }
         #endregion
         #region Association
         public Quizz Quizz { get; set; }

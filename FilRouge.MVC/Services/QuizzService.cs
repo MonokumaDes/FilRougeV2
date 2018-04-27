@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 using FilRouge.MVC.Entities;
 using FilRouge.MVC.ViewModels;
+using System.Data.Entity;
 using FilRouge.MVC.ViewModels.Maps;
 
 namespace FilRouge.MVC.Services
@@ -34,31 +30,11 @@ namespace FilRouge.MVC.Services
 		/// <returns>Retourne un objet Quizz</returns>
 		public QuizzViewModel GetQuizz(int id)
 		{
-			//Quizz fluentQuery = new Quizz();
-
 			using (FilRougeDBContext db = new FilRougeDBContext())
 			{
 				var quizz = db.Quizz.Single(e => e.QuizzId == id);
 				return quizz.MapToQuizzViewModel();
 			}
-
-
-			//try
-			//{
-			//	fluentQuery = db.Quizz.Single(e => e.QuizzId == id);
-			//	if (fluentQuery == null)
-			//	{
-			//		throw new WrongIdQuizz("L'id saisie n'existe pas");
-			//	}
-			//	db.Dispose();
-			//}
-			//catch (FormatException)
-			//{
-			//	db.Dispose();
-			//	Console.WriteLine("Veuillez saisir un id valide");
-			//}
-
-
 		}
 
 		/// <summary>
@@ -85,9 +61,9 @@ namespace FilRouge.MVC.Services
 					}
 
 				}
-				catch (ListQuizzEmpty)
+				catch (ListQuizzEmpty lqe)
 				{
-
+                    //throw new ListQuizzEmpty(lqe.Message);
 				}
 			}
 
@@ -183,7 +159,7 @@ namespace FilRouge.MVC.Services
 		/// <param name="prenomuser"></param>
 		/// <param name="questionlibre"></param>
 		/// <param name="nombrequestions"></param>
-		public Quizz CreateQuizz(QuizzViewModel quizzViewModel, int difficultymasterid)
+        public Quizz CreateQuizz(QuizzViewModel quizzViewModel, int difficultymasterid)
 		{
 			Quizz unQuizz = null;
 			using (FilRougeDBContext db = new FilRougeDBContext())
@@ -198,7 +174,7 @@ namespace FilRouge.MVC.Services
 				{
 					//TODO creer un viewbag des users => authorize create quizz
 					// verifier paramètres de création d'un quizz
-					Contact creatingQuizzContact = db.Users.Single(e => e.Name == quizz.NomUser);
+					Contact creatingQuizzContact = db.Users.Single(e => e.Id == quizz.ContactId);
 					Difficulty difficultyQuizz = db.Difficulties.Single(e => e.DifficultyId == difficultymasterid);
 					Technology technoQuizz = db.Technologies.Single(e => e.TechnoId == quizz.TechnologyId);
 
@@ -259,6 +235,24 @@ namespace FilRouge.MVC.Services
 			}
 			return question;
 		}
+
+        public int EditQuizz(QuizzViewModel quizzViewModel)
+        {
+            int id = 0;
+            using (var db = new FilRougeDBContext())
+            {
+                var quizz = db.Quizz.Find(quizzViewModel.QuizzId);
+
+                quizz.NomUser = quizzViewModel.NomUser;
+                quizz.PrenomUser = quizzViewModel.PrenomUser;
+
+                db.Entry(quizz).State = EntityState.Modified;
+                db.SaveChanges();
+
+                id = quizz.QuizzId;
+            }
+            return id;                
+        }
 		#endregion
 	}
 }

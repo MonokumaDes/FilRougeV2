@@ -30,7 +30,8 @@ namespace FilRouge.MVC.ViewModels.Maps
 				DifficultyId = quizz.DifficultyId,
 				QuestionLibre = quizz.QuestionLibre,
 				Timer = quizz.Timer,
-				QuestionId = quizz.Questions.Select(o => o.QuestionId).ToList()
+				QuestionId = quizz.Questions.Select(o => o.QuestionId).ToList(),
+                ContactId = quizz.ContactId
 
 				//TODO	Rajouter difficultiesID quand pret
 
@@ -49,16 +50,16 @@ namespace FilRouge.MVC.ViewModels.Maps
 			var quizz = new Quizz();
 			if (quizzViewModel == null)
 				return quizz;
-			quizz = new Quizz
-			{
-				QuizzId = quizzViewModel.QuizzId,
-				EtatQuizz = quizzViewModel.EtatQuizz,
-				NombreQuestion = quizzViewModel.NombreQuestion,
-				NomUser = quizzViewModel.NomUser,
-				PrenomUser = quizzViewModel.PrenomUser,
-				TechnologyId = quizzViewModel.TechnologyId,
-				DifficultyId = quizzViewModel.DifficultyId,
-
+            quizz = new Quizz
+            {
+                QuizzId = quizzViewModel.QuizzId,
+                EtatQuizz = quizzViewModel.EtatQuizz,
+                NombreQuestion = quizzViewModel.NombreQuestion,
+                NomUser = quizzViewModel.NomUser,
+                PrenomUser = quizzViewModel.PrenomUser,
+                TechnologyId = quizzViewModel.TechnologyId,
+                DifficultyId = quizzViewModel.DifficultyId,
+                ContactId = quizzViewModel.ContactId
 			};
 			return quizz;
 

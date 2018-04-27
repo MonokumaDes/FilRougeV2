@@ -24,5 +24,6 @@ namespace FilRouge.MVC.ViewModels
 		public int Timer { get; set; }
 		public List<int> QuestionId { get; set; }
 		public int Index { get; set; }
+        public string ContactId { get; set; }
 	}
 }

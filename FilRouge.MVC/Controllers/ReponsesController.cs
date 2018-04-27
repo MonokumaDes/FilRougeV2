@@ -20,8 +20,10 @@ namespace FilRouge.Web.Controllers
         {
             var question = _questionService.GetQuestion(id);
             ViewBag.Question = question;
-            //var reponsesList = new List<ReponseViewModel>();
-            return View(new ReponseViewModel());
+
+            var reponseViewModel = new ReponseViewModel();
+
+            return View(reponseViewModel);
         }
 
         // POST: Reponses/Create/id

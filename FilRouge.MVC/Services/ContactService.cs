@@ -162,5 +162,26 @@ namespace FilRouge.MVC.Services
             }
             return "";
         }
+
+        public List<SelectListItem> GetListItemContact()
+        {
+            var contactsListItem = new List<SelectListItem>();
+
+            using (var dbContext = new FilRougeDBContext())
+            {
+                var contacts = dbContext.Users;
+
+                foreach (var contact in contacts)
+                {
+                    contactsListItem.Add(new SelectListItem()
+                    {
+                        Text = contact.Name,
+                        Value = contact.Id
+                    });
+                }
+
+                return contactsListItem;
+            }
+        }
     }
 }

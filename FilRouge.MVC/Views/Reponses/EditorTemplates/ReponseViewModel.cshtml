@@ -1,11 +1,27 @@
 ﻿@model FilRouge.MVC.ViewModels.ReponseViewModel
 
-<div class="panel panel-primary">
-    <div style="padding:15px;">
-        @Html.Label("Réponse", htmlAttributes: new { @class = "control-label" })
-        @Html.TextBox("Reponse" + Model.ReponseId + ViewData["i"], (string)Model.Content, htmlAttributes: new { @class = "control-label" })
-        <br />
-        @Html.Label("Bonne réponse? ", htmlAttributes: new { @class = "control-label" })
-        @Html.CheckBox("BonneReponse" + Model.ReponseId + ViewData["i"], (bool)Model.TrueReponse)
+
+@if (ViewBag.Question.QuestionType.NameType.ToLower() == "choixunique")
+{
+    <div class="panel panel-primary">
+        <div style="padding:15px;">
+            @Html.Label("Réponse", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBox("Reponse" + Model.ReponseId + ViewData["i"], (string)Model.Content, htmlAttributes: new { @class = "control-label" })
+            <br />
+            @Html.Label("Bonne réponse? ", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("BonneReponse" + Model.ReponseId + ViewData["i"], (bool)Model.TrueReponse)
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="panel panel-primary">
+        <div style="padding:15px;">
+            @Html.Label("Réponse", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBox("Reponse" + Model.ReponseId + ViewData["i"], (string)Model.Content, htmlAttributes: new { @class = "control-label" })
+            <br />
+            @Html.Label("Bonne réponse? ", htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBox("BonneReponse" + Model.ReponseId + ViewData["i"], (bool)Model.TrueReponse)
+        </div>
+    </div>
+}

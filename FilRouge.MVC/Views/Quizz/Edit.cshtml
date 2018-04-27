@@ -1,2 +1,29 @@
 ﻿@model FilRouge.MVC.ViewModels.QuizzViewModel
 
+@{
+    ViewBag.Title = "Edition";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-4">
+            @Html.HiddenFor(m => m.QuizzId)
+            <h1>Edition d'un quizz</h1>
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.NomUser)
+            @Html.EditorFor(m => m.NomUser)
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.PrenomUser)
+            @Html.EditorFor(m => m.PrenomUser)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 Col-md-10">
+            <input type="submit" value="Editer" class="btn-default" />
+        </div>
+
+    </div>
+}

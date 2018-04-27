@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201804260736198_v1.Designer.cs">
       <DependentUpon>201804260736198_v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804270921404_v2.cs" />
+    <Compile Include="Migrations\201804270921404_v2.Designer.cs">
+      <DependentUpon>201804270921404_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AnswerTypeEnum.cs" />
@@ -329,11 +333,9 @@
     <Content Include="Views\Questions\Questions.cshtml" />
     <Content Include="Views\Questions\EditorTemplates\QuestionViewModel.cshtml" />
     <Content Include="Views\Quizz\Create.cshtml" />
-    <Content Include="Views\Quizz\Delete.cshtml" />
     <Content Include="Views\Quizz\Details.cshtml" />
     <Content Include="Views\Quizz\Edit.cshtml" />
     <Content Include="Views\Quizz\EditorTemplates\QuizzViewModel.cshtml" />
-    <Content Include="Views\Reponses\EditorTemplates\ReponseViewModel.cshtml" />
     <Content Include="Views\Reponses\Create.cshtml" />
     <Content Include="Views\Reponses\Delete.cshtml" />
     <Content Include="Views\Reponses\Details.cshtml" />
@@ -351,6 +353,7 @@
     <Content Include="Views\Quizz\_ReponseQuestionQuizz.cshtml" />
     <Content Include="Views\Quizz\QuizzAnswers.cshtml" />
     <Content Include="Views\Quizz\Quizz.cshtml" />
+    <Content Include="Views\Reponses\EditorTemplates\ReponseViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -371,6 +374,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804260736198_v1.resx">
       <DependentUpon>201804260736198_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804270921404_v2.resx">
+      <DependentUpon>201804270921404_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

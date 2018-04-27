@@ -75,9 +75,7 @@ namespace FilRouge.MVC.Services
 		/// <returns></returns>
 		public List<SelectListItem> GetListItemsDifficulties()
 		{
-
 			var difficutliesListItem = new List<SelectListItem>();
-
 
 			using (var dbContext = new FilRougeDBContext())
 			{

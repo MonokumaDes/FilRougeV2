@@ -119,7 +119,7 @@ namespace FilRouge.MVC.Services
 			return sortedQuestionsQuizz;
 		}
 
-		internal void GetQuestionsReponsesForQuizz(int quizzId)
+		
 		/// <summary>
 		/// Sauvegarde de la Reponse du User dans la BDD
 		/// </summary>

@@ -327,7 +327,6 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Questions\AddQuestion.cshtml" />
-    <Content Include="Views\Questions\Delete.cshtml" />
     <Content Include="Views\Questions\Details.cshtml" />
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Questions.cshtml" />
@@ -337,8 +336,6 @@
     <Content Include="Views\Quizz\Edit.cshtml" />
     <Content Include="Views\Quizz\EditorTemplates\QuizzViewModel.cshtml" />
     <Content Include="Views\Reponses\Create.cshtml" />
-    <Content Include="Views\Reponses\Delete.cshtml" />
-    <Content Include="Views\Reponses\Details.cshtml" />
     <Content Include="Views\Reponses\Edit.cshtml" />
     <Content Include="Views\Technologies\Create.cshtml" />
     <Content Include="Views\Technologies\Details.cshtml" />

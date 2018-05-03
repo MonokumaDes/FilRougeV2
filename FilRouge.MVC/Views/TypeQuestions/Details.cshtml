@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details du type de question : @Model.NameType</h2>
 
 <div>
     <h4>TypeQuestion</h4>
@@ -13,11 +13,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.NameType)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.NameType)
         </dd>
-
     </dl>
 </div>
 <p>

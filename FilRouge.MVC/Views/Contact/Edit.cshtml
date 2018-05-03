@@ -4,15 +4,12 @@
     ViewBag.Title = "Edition d'un contact";
 }
 
-<h2>@ViewBag.Title</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Information du contact</h4>
+        <h4>Edition du contact : @Model.Name</h4>
         <hr />
 
         @Html.EditorFor(m => m)

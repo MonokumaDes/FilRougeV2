@@ -1,0 +1,34 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+@using FilRouge.MVC.Models;
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.HiddenFor(m => m.QuestionId)
+    </div>
+</div>
+<table>
+	<tr>
+		<td>@Html.LabelFor(m => m.Content)</td>
+		<td>@Html.DisplayFor(m => m.Content)</td>
+		<td>@Html.ValidationMessageFor(m => m.Content)</td>
+	</tr>
+	<tr>
+		<td>@Html.LabelFor(m => m.Commentaire)</td>
+		<td>@Html.DisplayFor(m => m.Commentaire)</td>
+	</tr>
+	
+</table>
+<div class="row">
+	<div class="col-md-4">
+		@foreach (var reponse in Model.Reponses)
+		{
+			<div class="panel panel-primary">
+				<div style="padding:15px;">
+					@Html.Label("Reponse" + reponse.Content, (string)reponse.Content)
+					@Html.CheckBox("BonneReponse" + reponse.ReponseId)
+					<br />
+				</div>
+			</div>
+		}
+	</div>
+</div>

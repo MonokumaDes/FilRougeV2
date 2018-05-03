@@ -120,8 +120,33 @@ namespace FilRouge.MVC.Services
 		}
 
 		internal void GetQuestionsReponsesForQuizz(int quizzId)
+		/// <summary>
+		/// Sauvegarde de la Reponse du User dans la BDD
+		/// </summary>
+		/// <param name="questionViewModel"></param>
+		public void SaveUserResponse(List<Reponses> reponses, int quizzId)
 		{
+			
+			using (FilRougeDBContext db = new FilRougeDBContext())
+			{
+				//mapping de la question 
+				//var question = questionViewModel.MapToQuestion();
 
+				//Boucle pour les reponses du User
+				foreach (var reponse in reponses)
+				{
+					var uneReponseUser = new UserReponse()
+					{
+						QuizzId = quizzId,
+						ReponseId = reponse.ReponseId,
+						//TODO Changer pour recuperer la valeur de la reponse
+						Valeur = reponse.Content.ToString()
+						
+					};
+					db.UserReponse.Add(uneReponseUser);
+				}
+				db.SaveChanges();
+			}
 		}
 
 		/// <summary>

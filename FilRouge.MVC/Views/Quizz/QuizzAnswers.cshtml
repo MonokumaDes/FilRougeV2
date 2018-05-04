@@ -5,15 +5,7 @@
 	@Scripts.Render("~/bundles/jquery")
 
 }
-
-
-@{
-	ViewBag.Title = "Test";
-	//FilRouge.MVC.ViewModels.QuestionViewModel question = ViewBag.QuestionListByQuizz;
-	//FilRouge.MVC.ViewModels.ReponseViewModel reponse = ViewBag.ReponseByQuestionId;
-
-	@**@
-}
+@{	ViewBag.Title = "Test"; }
 
 <h2>Test</h2>
 <div class="row">
@@ -40,24 +32,4 @@
 	<div id="AffichageQuestionId"> Cliquez sur suivant pour commencer le test</div>
 </div>
 
-@*@using (Html.BeginForm("QuestionQuizz", "Quizz", null, FormMethod.Post, new { id = Model.QuizzId }))
-	{
-		<a href="javascript:document.getElementById(Model.QuizzId).submit(Model.QuizzId)" class="btn"></a>
-	}*@
-
-@*<script>
-		$('.btn').click(clickMe);
-
-		function clickMe(event) {
-			event.preventDefault();
-			$("#AffichageQuestionId").load(
-				$(this).attr("data-url"),
-				{ 'paramKey': 1 },
-				function (response, status, xhr)
-				{
-
-				}
-			);
-		}
-	</script>*@
 

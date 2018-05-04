@@ -79,9 +79,6 @@ namespace FilRouge.MVC.Controllers
 
 			return View("Questions", questions);
 		}
-
-		//TODO changer le ViewBag.DifficultyId quand dispo dans Difficulty services 
-		private FilRougeDBContext db = new FilRougeDBContext();
 	
 		public ActionResult Details(int? id)
 		{

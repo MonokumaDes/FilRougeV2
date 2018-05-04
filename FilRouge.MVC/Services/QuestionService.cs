@@ -120,25 +120,7 @@ namespace FilRouge.MVC.Services
 				{
 					questionViewModels.Add(question.MapToQuestionsViewModel());
 				}
-				// #TODO recuperer la première question non répondue 
 				
-				//var questionEntities = dbContext.Quizz.Join(
-				//	dbContext.UserReponse,
-				//	c => )
-
-				//	.Find(quizzId).Questions;
-
-				//foreach (var question in questionEntities)
-				//{
-				//	questionViewModels.Add(question.MapToQuestionsViewModel());
-				//}
-
-			//	var query = db.Categories         // source
-			//	.Join(db.CategoryMaps,         // target
-			//		 c => c.CategoryId,          // FK
-			//	  cm => cm.ChildCategoryId,   // PK
-			// (c, cm) => new { Category = c, CategoryMaps = cm }) // project result
-			//	.Select(x => x.Category);  // select result
 			}
 
 			return questionViewModels;

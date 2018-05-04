@@ -37,12 +37,37 @@ namespace FilRouge.MVC.Services
 			}
 		}
 
-		/// <summary>
-		/// Fonction retournant tous les quizz dans une liste de Quizz
-		/// Fonctionne avec une fluentQuerry
-		/// </summary>
-		/// <returns>Retourne tous les quizz</returns>
-		public List<QuizzViewModel> GetAllQuizz()
+        public QuizzAnswerReponsesViewModel GetQuizzAnswer(int id)
+        {
+            using (FilRougeDBContext db = new FilRougeDBContext())
+            {
+                var quizz = db.Quizz.Include(q => q.Questions)
+                                    .Include(q => q.Technology)
+                                    .Include(q => q.Difficulty)
+                                    .Include(q => q.Contact)
+                                    .Single(e => e.QuizzId == id).MapToQuizzAnswerReponsesViewModel();
+
+                return quizz;
+            }
+        }
+        public List<UserReponse> GetQuizzUserAnswer(int id)
+        {
+            using (FilRougeDBContext db = new FilRougeDBContext())
+            {
+                var userReponse = db.UserReponse.Include(u => u.Reponse).Where(q => q.QuizzId == id).ToList();
+
+                return userReponse;
+            }
+        }
+
+       
+
+        /// <summary>
+        /// Fonction retournant tous les quizz dans une liste de Quizz
+        /// Fonctionne avec une fluentQuerry
+        /// </summary>
+        /// <returns>Retourne tous les quizz</returns>
+        public List<QuizzViewModel> GetAllQuizz()
 		{
 			List<QuizzViewModel> desQuizz = new List<QuizzViewModel>();
 			using (FilRougeDBContext db = new FilRougeDBContext())

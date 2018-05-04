@@ -56,6 +56,8 @@ namespace FilRouge.MVC.Controllers
                 }
                 else
                 {
+                    //saisie d'une réponse dans la table reponse pour la question saisieLibre ou saisieCode
+                    _questionService.AddReponsesParDefaultToQuestion(Id);
                     return RedirectToAction("Details", new { id = Id });
                 }
 

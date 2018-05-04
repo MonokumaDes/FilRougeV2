@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using FilRouge.MVC.Entities;
+using FilRouge.MVC.Models;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.ViewModels.Maps;
 
@@ -37,12 +38,36 @@ namespace FilRouge.MVC.Services
 			return id;
 		}
 
-		/// <summary>
-		/// Retourne une question par son "ID"
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public QuestionViewModel GetQuestion(int? id)
+        public void AddReponsesParDefaultToQuestion(int id)
+        {
+            using (var dbContext = new FilRougeDBContext())
+            {
+                var question = dbContext.Questions.FirstOrDefault(q => q.QuestionId == id);
+                var valeur = "saisieLibre";
+                if(question.MapToQuestionsViewModel().AnswerType == AnswerTypeEnum.SaisieCode)
+                {
+                    valeur = "saisieCode";
+                }
+
+                //var listeReponseUnique = new List<Reponses>();
+                var uneReponse = new Reponses()
+                {
+                    Content = valeur,
+                    Question = question,
+                    TrueReponse = true
+                };
+
+                question.Reponses.Add(uneReponse);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Retourne une question par son "ID"
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public QuestionViewModel GetQuestion(int? id)
 		{
 			var question = new Questions();
 

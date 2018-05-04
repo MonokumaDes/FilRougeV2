@@ -1,2 +1,97 @@
-﻿@model FilRouge.MVC.ViewModels.QuizzViewModel
+﻿@model FilRouge.MVC.ViewModels.QuizzAnswerReponsesViewModel
+@using FilRouge.MVC.Entities;
+@using FilRouge.MVC.Models;
+
+@{
+    ViewBag.Title = "Resultat";
+    var userReponse = (List<UserReponse>)ViewBag.UserReponses;
+}
+
+<h2>Resultat du quizz de @Model.NomUser @Model.PrenomUser (@Model.QuizzId)</h2>
+
+
+<div class="alert alert-success">
+    <b>Candidat</b> : @Model.PrenomUser @Model.NomUser <br />
+
+    @Html.LabelFor(m => m.TechnologyName) : @Html.DisplayFor(m => m.TechnologyName) <br />
+
+    @Html.LabelFor(m => m.DifficultyName) : @Html.DisplayFor(m => m.DifficultyName) <br />
+
+    @Html.LabelFor(m => m.NombreQuestion) : @Html.DisplayFor(m => m.NombreQuestion) <br />
+
+    @Html.LabelFor(m => m.ContactName) : @Html.DisplayFor(m => m.ContactName) (  @Html.DisplayFor(m => m.ContactEmail) )<br />
+
+</div>
+
+<h2>Réponses du candidat</h2>
+
+@foreach (var question in Model.Questions)
+{
+    <div class="alert alert-info">
+        @question.QuestionId | @question.Content <br />
+        @question.Commentaire <br />
+    </div>
+    <div class="list-group">
+        @if (question.AnswerType != AnswerTypeEnum.SaisieCode && question.AnswerType != AnswerTypeEnum.SaisieLibre)
+        {
+
+
+            foreach (var rep in question.Reponses)
+            {
+                var idr = rep.ReponseId;
+                var estCocherParLeCandidat = userReponse.FirstOrDefault(u => u.ReponseId == idr);
+                var estCocher = "";
+                var cssResultat = "";
+
+                var commenteurSaisieParLeCandidantRep = "";
+                if (estCocherParLeCandidat != null)
+                {
+                    commenteurSaisieParLeCandidantRep = estCocherParLeCandidat.Commentaire;
+                }
+
+                if (rep.TrueReponse)
+                {
+                    cssResultat = "background-color:green;opacity:0.6;color:white;";
+                    if (estCocherParLeCandidat != null)
+                    {
+
+                        estCocher = "glyphicon-check";
+                    }
+                    else
+                    {
+                        //cssResultat = "background-color:red;opacity:0.6;color:white;";
+                    }
+                    //estCocher = "";
+                    //cssResultat = "background-color:green;opacity:0.6;color:white;";
+                }
+                else
+                {
+                    if (estCocherParLeCandidat != null)
+                    {
+                        //cssResultat = "background-color:red;opacity:0.6;color:white;";
+                        estCocher = "glyphicon-remove";
+                    }
+                }
+
+            <li class="list-group-item" style="@cssResultat">
+                @idr --  @rep.Content
+                <span class="pull-right">
+                    <span class='glyphicon @estCocher'></span>
+                </span>
+            </li>
+            <!--<p><b>Commentaire du candidat</b> : <br />@*commenteurSaisieParLeCandidantRep*@</p>-->
+    }
+
+}
+else
+{
+    var idrLibre = question.Reponses[0].ReponseId;
+    var valeurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Valeur;
+    var commenteurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Commentaire;
+    <p><b>Réponse du candidat</b> : <br />@valeurSaisieParLeCandidant</p>
+    <p><b>Commentaire du candidat</b> : <br />@commenteurSaisieParLeCandidant</p>
+}
+    </div>
+}
+<hr />
 

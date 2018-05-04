@@ -211,5 +211,14 @@ namespace FilRouge.MVC.Controllers
             return View(quizzViewModel);
         }
 
-	}
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            QuizzAnswerReponsesViewModel quizz = _quizzService.GetQuizzAnswer(id);
+            ViewBag.UserReponses = _quizzService.GetQuizzUserAnswer(id);
+
+            return View(quizz);
+        }
+
+    }
 }

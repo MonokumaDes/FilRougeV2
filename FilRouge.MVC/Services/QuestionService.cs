@@ -49,7 +49,8 @@ namespace FilRouge.MVC.Services
 			using (var dbContext = new FilRougeDBContext())
 			{
 				question = dbContext.Questions
-                    .Include("Technology").Include("TypeQuestion").Include("Difficulty").Include("Reponses")
+                    .Include(e => e.Technology)
+                    .Include(q => q.TypeQuestion).Include(q => q.Difficulty).Include(q => q.Reponses)
                     .Where(q => q.QuestionId == id)
                     .Select(q => q).First();
 			}

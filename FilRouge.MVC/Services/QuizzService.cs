@@ -5,16 +5,20 @@ using FilRouge.MVC.Entities;
 using FilRouge.MVC.ViewModels;
 using System.Data.Entity;
 using FilRouge.MVC.ViewModels.Maps;
+using FilRouge.MVC.Models;
 
 namespace FilRouge.MVC.Services
 {
+
 	/// <summary>
 	/// Services liés au quizz, pdf, gestion, mails, CRUD...
 	/// </summary>
 	public class QuizzService
 	{
-		#region Properties
-		private static Random random = new Random();
+        private QuestionService _questionService = new QuestionService();
+
+        #region Properties
+        private static Random random = new Random();
 		#endregion
 		/// <summary>
 		/// Constructeur de la classe de QuizzService
@@ -60,6 +64,52 @@ namespace FilRouge.MVC.Services
             }
         }
 
+        public SortedList<string , int> GetScore(int quizzId)
+        {
+            var resumeTotaux = new SortedList<string, int>();
+            int total = 0;
+            int totalChoixLibre = 0;
+
+            var questions = _questionService.GetQuestionsByQuizzId(quizzId);
+            var userReponses = GetQuizzUserAnswer(quizzId);
+            var questionChoixMultiAndUnique = questions.Where(q => q.AnswerType == AnswerTypeEnum.ChoixUnique || q.AnswerType == AnswerTypeEnum.ChoixMultiple);
+
+
+                foreach (var question in questionChoixMultiAndUnique)
+                {
+                    // recup reponse candidat
+                    var ReponsesCandidat = userReponses.Where(u => u.Reponse.QuestionId == question.QuestionId).ToList ();
+                    // recup les bonnes reponses de la question
+                    var BonneReponses = question.Reponses.Where(r => r.TrueReponse == true).ToList();
+                    var statusReponse = true;
+                    // verifie le compte entre le nb de bonne reponse et le nb de reponse candidat
+                    if (ReponsesCandidat.Count() == BonneReponses.Count())
+                    {
+
+                        foreach (var rep in ReponsesCandidat)
+                        {
+                            var verif = BonneReponses.FirstOrDefault(q => q.ReponseId == rep.ReponseId);
+                            if (verif == null)
+                            {
+                                statusReponse = false;
+                            }
+                        }
+                        if (statusReponse == true)
+                        {
+                           total++;
+                        }
+                    }
+                }
+
+            var questionLibre = questions.Count() - questionChoixMultiAndUnique.Count();
+            resumeTotaux.Add("totalReponseChoix", total);
+            resumeTotaux.Add("totalQuestionLibre", questionLibre);
+            resumeTotaux.Add("totalQCM", questionChoixMultiAndUnique.Count());
+
+
+
+            return resumeTotaux;
+        }
        
 
         /// <summary>

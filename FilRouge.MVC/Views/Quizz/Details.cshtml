@@ -34,7 +34,9 @@
     <div class="list-group">
         @if (question.AnswerType != AnswerTypeEnum.SaisieCode && question.AnswerType != AnswerTypeEnum.SaisieLibre)
         {
-
+            var comm = userReponse.FirstOrDefault(u => u.Reponse.QuestionId == question.QuestionId);
+            var commCand = "pas de commentaire";
+            if (comm != null) { commCand = comm.Commentaire; }
 
             foreach (var rep in question.Reponses)
             {
@@ -57,41 +59,35 @@
 
                         estCocher = "glyphicon-check";
                     }
-                    else
-                    {
-                        //cssResultat = "background-color:red;opacity:0.6;color:white;";
-                    }
-                    //estCocher = "";
-                    //cssResultat = "background-color:green;opacity:0.6;color:white;";
                 }
                 else
                 {
                     if (estCocherParLeCandidat != null)
                     {
-                        //cssResultat = "background-color:red;opacity:0.6;color:white;";
                         estCocher = "glyphicon-remove";
                     }
                 }
 
-            <li class="list-group-item" style="@cssResultat">
-                @idr --  @rep.Content
-                <span class="pull-right">
-                    <span class='glyphicon @estCocher'></span>
-                </span>
-            </li>
-            <!--<p><b>Commentaire du candidat</b> : <br />@*commenteurSaisieParLeCandidantRep*@</p>-->
-    }
-
-}
-else
-{
-    var idrLibre = question.Reponses[0].ReponseId;
-    var valeurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Valeur;
-    var commenteurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Commentaire;
-    <p><b>Réponse du candidat</b> : <br />@valeurSaisieParLeCandidant</p>
-    <p><b>Commentaire du candidat</b> : <br />@commenteurSaisieParLeCandidant</p>
-}
+                <li class="list-group-item" style="@cssResultat">
+                    @idr --  @rep.Content
+                    <span class="pull-right">
+                        <span class='glyphicon @estCocher'></span>
+                    </span>
+                </li>
+            }
+            <p><b>Commentaire du candidat</b> : @commCand</p>
+        }
+        else
+        {
+            var idrLibre = question.Reponses[0].ReponseId;
+            var valeurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Valeur;
+            var commenteurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Commentaire;
+            <p><b>Réponse du candidat</b> : <br />@valeurSaisieParLeCandidant</p>
+            <p><b>Commentaire du candidat</b> : <br />@commenteurSaisieParLeCandidant</p>
+        }
     </div>
 }
 <hr />
+Nombre de bonne réponse : @ViewBag.Scores["totalReponseChoix"] / @ViewBag.Scores["totalQCM"] questions de type QCM <br />
+Nombre de question libre : @ViewBag.Scores["totalQuestionLibre"] 
 

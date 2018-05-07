@@ -217,6 +217,8 @@ namespace FilRouge.MVC.Controllers
             QuizzAnswerReponsesViewModel quizz = _quizzService.GetQuizzAnswer(id);
             ViewBag.UserReponses = _quizzService.GetQuizzUserAnswer(id);
 
+            ViewBag.Scores = _quizzService.GetScore(id);
+
             return View(quizz);
         }
 

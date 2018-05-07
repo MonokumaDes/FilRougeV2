@@ -4,7 +4,7 @@
 	ViewBag.Title = "_ReponseQuestionQuizz";
 }
 @Html.Hidden("Qid", Model.QuestionId)
-
+@Html.HiddenFor(m => m.QuestionId)
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-4">

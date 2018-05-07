@@ -37,12 +37,37 @@ namespace FilRouge.MVC.Services
 			}
 		}
 
-		/// <summary>
-		/// Fonction retournant tous les quizz dans une liste de Quizz
-		/// Fonctionne avec une fluentQuerry
-		/// </summary>
-		/// <returns>Retourne tous les quizz</returns>
-		public List<QuizzViewModel> GetAllQuizz()
+        public QuizzAnswerReponsesViewModel GetQuizzAnswer(int id)
+        {
+            using (FilRougeDBContext db = new FilRougeDBContext())
+            {
+                var quizz = db.Quizz.Include(q => q.Questions)
+                                    .Include(q => q.Technology)
+                                    .Include(q => q.Difficulty)
+                                    .Include(q => q.Contact)
+                                    .Single(e => e.QuizzId == id).MapToQuizzAnswerReponsesViewModel();
+
+                return quizz;
+            }
+        }
+        public List<UserReponse> GetQuizzUserAnswer(int id)
+        {
+            using (FilRougeDBContext db = new FilRougeDBContext())
+            {
+                var userReponse = db.UserReponse.Include(u => u.Reponse).Where(q => q.QuizzId == id).ToList();
+
+                return userReponse;
+            }
+        }
+
+       
+
+        /// <summary>
+        /// Fonction retournant tous les quizz dans une liste de Quizz
+        /// Fonctionne avec une fluentQuerry
+        /// </summary>
+        /// <returns>Retourne tous les quizz</returns>
+        public List<QuizzViewModel> GetAllQuizz()
 		{
 			List<QuizzViewModel> desQuizz = new List<QuizzViewModel>();
 			using (FilRougeDBContext db = new FilRougeDBContext())
@@ -63,7 +88,7 @@ namespace FilRouge.MVC.Services
 				}
 				catch (ListQuizzEmpty lqe)
 				{
-                    //throw new ListQuizzEmpty(lqe.Message);
+                    throw new ListQuizzEmpty(lqe.Message);
 				}
 			}
 
@@ -148,6 +173,33 @@ namespace FilRouge.MVC.Services
 				db.SaveChanges();
 			}
 		}
+		/// <summary>
+		/// Sauvegarde de la Reponse et du commentaire du User dans la BDD
+		/// </summary>
+		/// <param name="questionViewModel"></param>
+		public void SaveUserResponse(List<Reponses> reponses, int quizzId, string commentaire)
+		{
+
+			using (FilRougeDBContext db = new FilRougeDBContext())
+			{
+				
+				//Boucle pour les reponses du User
+				foreach (var reponse in reponses)
+				{
+					var uneReponseUser = new UserReponse()
+					{
+						QuizzId = quizzId,
+						ReponseId = reponse.ReponseId,
+						//TODO Changer pour recuperer la valeur de la reponse
+						Valeur = reponse.Content.ToString(),
+						Commentaire = commentaire,
+						EstRepondu = true
+					};
+					db.UserReponse.Add(uneReponseUser);
+				}
+				db.SaveChanges();
+			}
+		}
 
 		/// <summary>
 		/// Création d'un Quizz 
@@ -159,7 +211,7 @@ namespace FilRouge.MVC.Services
 		/// <param name="prenomuser"></param>
 		/// <param name="questionlibre"></param>
 		/// <param name="nombrequestions"></param>
-        public Quizz CreateQuizz(QuizzViewModel quizzViewModel, int difficultymasterid)
+		public Quizz CreateQuizz(QuizzViewModel quizzViewModel, int difficultymasterid)
 		{
 			Quizz unQuizz = null;
 			using (FilRougeDBContext db = new FilRougeDBContext())
@@ -230,8 +282,18 @@ namespace FilRouge.MVC.Services
 
 			using (var dbContext = new FilRougeDBContext())
 			{
-				var questionEntities = dbContext.Quizz.Find(quizzId).Questions;
-				question = questionEntities.Select(e => e).First().MapToQuestionsViewModel();
+				// On récupère la liste des question Ids d'un Quizz
+				var questionIds = dbContext.Quizz.Find(quizzId).Questions.Select(q => q.QuestionId).Distinct();
+				// // On récupère la liste des question Ids  qui ont déjà une réponse
+				var questionReponduIds = dbContext.UserReponse.Where(q => q.QuizzId == quizzId).Select(u => u.Reponse.QuestionId).Distinct();
+
+				//// On récupère les questions sans réponse 
+				var questionSansReponse = questionIds.Where(q => !questionReponduIds.Contains(q)).OrderBy(q => q).FirstOrDefault();
+
+				//recuperer la première question à partir des questions sans réponse
+				var questionEntitie = dbContext.Questions.FirstOrDefault(q => q.QuestionId == questionSansReponse);
+								
+				 question = questionEntitie.MapToQuestionsViewModel();
 			}
 			return question;
 		}
@@ -253,6 +315,7 @@ namespace FilRouge.MVC.Services
             }
             return id;                
         }
+
 		#endregion
 	}
 }

@@ -262,9 +262,11 @@
     <Compile Include="ViewModels\Maps\DifficultyRateMap.cs" />
     <Compile Include="ViewModels\Maps\Map.cs" />
     <Compile Include="ViewModels\Maps\QuestionMap.cs" />
+    <Compile Include="ViewModels\Maps\QuizzAnswerReponsesMap.cs" />
     <Compile Include="ViewModels\Maps\QuizzMap.cs" />
     <Compile Include="ViewModels\Maps\ReponseMap.cs" />
     <Compile Include="ViewModels\QuestionsViewModel.cs" />
+    <Compile Include="ViewModels\QuizzAnswerReponsesViewModel.cs" />
     <Compile Include="ViewModels\QuizzViewModel.cs" />
     <Compile Include="ViewModels\ReponseViewModel.cs" />
     <Compile Include="ViewModels\TechnologyViewModel.cs" />

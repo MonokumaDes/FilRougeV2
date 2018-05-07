@@ -7,17 +7,25 @@ import { QuestionReponseComponent } from './QuestionReponse/QuestionReponse.comp
 import { QuizzComponent } from './Quizz/Quizz.component';
 import { QuestionReponseService } from './services/QuestionReponse.service';
 import { QuizzService } from './services/Quizz.service';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
+
+const appRoutes: Routes = [
+  { path: 'Quizz', component: QuizzComponent }
+];
 
 
 @NgModule({
   declarations: [
-    AppComponent
-,
+    AppComponent,
     QuestionReponseComponent,
     QuizzComponent
 ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     QuizzService,

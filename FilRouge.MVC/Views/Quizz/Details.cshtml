@@ -3,23 +3,23 @@
 @using FilRouge.MVC.Models;
 
 @{
-    ViewBag.Title = "Resultat";
-    var userReponse = (List<UserReponse>)ViewBag.UserReponses;
+	ViewBag.Title = "Resultat";
+	var userReponse = (List<UserReponse>)ViewBag.UserReponses;
 }
 
 <h2>Resultat du quizz de @Model.NomUser @Model.PrenomUser (@Model.QuizzId)</h2>
 
 
 <div class="alert alert-success">
-    <b>Candidat</b> : @Model.PrenomUser @Model.NomUser <br />
+	<b>Candidat</b> : @Model.PrenomUser @Model.NomUser <br />
 
-    @Html.LabelFor(m => m.TechnologyName) : @Html.DisplayFor(m => m.TechnologyName) <br />
+	@Html.LabelFor(m => m.TechnologyName) : @Html.DisplayFor(m => m.TechnologyName) <br />
 
-    @Html.LabelFor(m => m.DifficultyName) : @Html.DisplayFor(m => m.DifficultyName) <br />
+	@Html.LabelFor(m => m.DifficultyName) : @Html.DisplayFor(m => m.DifficultyName) <br />
 
-    @Html.LabelFor(m => m.NombreQuestion) : @Html.DisplayFor(m => m.NombreQuestion) <br />
+	@Html.LabelFor(m => m.NombreQuestion) : @Html.DisplayFor(m => m.NombreQuestion) <br />
 
-    @Html.LabelFor(m => m.ContactName) : @Html.DisplayFor(m => m.ContactName) (  @Html.DisplayFor(m => m.ContactEmail) )<br />
+	@Html.LabelFor(m => m.ContactName) : @Html.DisplayFor(m => m.ContactName) (  @Html.DisplayFor(m => m.ContactEmail) )<br />
 
 </div>
 
@@ -27,67 +27,71 @@
 
 @foreach (var question in Model.Questions)
 {
-    <div class="alert alert-info">
-        @question.QuestionId | @question.Content <br />
-        @question.Commentaire <br />
-    </div>
-    <div class="list-group">
-        @if (question.AnswerType != AnswerTypeEnum.SaisieCode && question.AnswerType != AnswerTypeEnum.SaisieLibre)
-        {
-            var comm = userReponse.FirstOrDefault(u => u.Reponse.QuestionId == question.QuestionId);
-            var commCand = "pas de commentaire";
-            if (comm != null) { commCand = comm.Commentaire; }
+	<div class="alert alert-info">
+		@question.QuestionId | @question.Content <br />
+		@question.Commentaire <br />
+	</div>
+	<div class="list-group">
+		@if (question.AnswerType != AnswerTypeEnum.SaisieCode && question.AnswerType != AnswerTypeEnum.SaisieLibre)
+		{
+			var comm = userReponse.FirstOrDefault(u => u.Reponse.QuestionId == question.QuestionId);
+			var commCand = "pas de commentaire";
+			if (comm != null) { commCand = comm.Commentaire; }
 
-            foreach (var rep in question.Reponses)
-            {
-                var idr = rep.ReponseId;
-                var estCocherParLeCandidat = userReponse.FirstOrDefault(u => u.ReponseId == idr);
-                var estCocher = "";
-                var cssResultat = "";
+			foreach (var rep in question.Reponses)
+			{
+				var idr = rep.ReponseId;
+				var estCocherParLeCandidat = userReponse.FirstOrDefault(u => u.ReponseId == idr);
+				var estCocher = "";
+				var cssResultat = "";
 
-                var commenteurSaisieParLeCandidantRep = "";
-                if (estCocherParLeCandidat != null)
-                {
-                    commenteurSaisieParLeCandidantRep = estCocherParLeCandidat.Commentaire;
-                }
+				var commenteurSaisieParLeCandidantRep = "";
+				if (estCocherParLeCandidat != null)
+				{
+					commenteurSaisieParLeCandidantRep = estCocherParLeCandidat.Commentaire;
+				}
 
-                if (rep.TrueReponse)
-                {
-                    cssResultat = "background-color:green;opacity:0.6;color:white;";
-                    if (estCocherParLeCandidat != null)
-                    {
+				if (rep.TrueReponse)
+				{
+					cssResultat = "background-color:green;opacity:0.6;color:white;";
+					if (estCocherParLeCandidat != null)
+					{
 
-                        estCocher = "glyphicon-check";
-                    }
-                }
-                else
-                {
-                    if (estCocherParLeCandidat != null)
-                    {
-                        estCocher = "glyphicon-remove";
-                    }
-                }
+						estCocher = "glyphicon-check";
+					}
+				}
+				else
+				{
+					if (estCocherParLeCandidat != null)
+					{
+						estCocher = "glyphicon-remove";
+					}
+				}
 
-                <li class="list-group-item" style="@cssResultat">
-                    @idr --  @rep.Content
-                    <span class="pull-right">
-                        <span class='glyphicon @estCocher'></span>
-                    </span>
-                </li>
-            }
-            <p><b>Commentaire du candidat</b> : @commCand</p>
-        }
-        else
-        {
-            var idrLibre = question.Reponses[0].ReponseId;
-            var valeurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Valeur;
-            var commenteurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Commentaire;
-            <p><b>Réponse du candidat</b> : <br />@valeurSaisieParLeCandidant</p>
-            <p><b>Commentaire du candidat</b> : <br />@commenteurSaisieParLeCandidant</p>
-        }
-    </div>
+				<li class="list-group-item" style="@cssResultat">
+					@idr --  @rep.Content
+					<span class="pull-right">
+						<span class='glyphicon @estCocher'></span>
+					</span>
+				</li>
+			}
+			<p><b>Commentaire du candidat</b> : @commCand</p>
+		}
+		else
+		{
+			var idrLibre = question.Reponses[0].ReponseId;
+			var valeurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Valeur;
+			var commenteurSaisieParLeCandidant = userReponse.FirstOrDefault(u => u.ReponseId == idrLibre).Commentaire;
+			<p><b>Réponse du candidat</b> : <br />@valeurSaisieParLeCandidant</p>
+			<p><b>Commentaire du candidat</b> : <br />@commenteurSaisieParLeCandidant</p>
+		}
+	</div>
 }
 <hr />
 Nombre de bonne réponse : @ViewBag.Scores["totalReponseChoix"] / @ViewBag.Scores["totalQCM"] questions de type QCM <br />
-Nombre de question libre : @ViewBag.Scores["totalQuestionLibre"] 
+Nombre de question libre : @ViewBag.Scores["totalQuestionLibre"] <br />
+
+@Html.ActionLink("Voir le pdf", "ResultatToPDF", new { Quizzid = Model.QuizzId }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Envoyer l'email", "ResultatSendtoPDF", new { Quizzid = Model.QuizzId }, new { @class = "btn btn-primary" })
+
 

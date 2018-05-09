@@ -50,14 +50,15 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.TechnologyId)
 			</td>
-            <td>
+			<td>
 
-                @Html.ActionLink("Edit", "Edit", new { quizzId = item.QuizzId }) |
+				@Html.ActionLink("Edit", "Edit", new { quizzId = item.QuizzId }) |
 
-                @Html.ActionLink("Commencer le Quizz", "Test", new { id = item.QuizzId }) |
+				@Html.ActionLink("Commencer le Quizz", "Test", new { id = item.QuizzId }) |
 
-                @Html.ActionLink("Voir le résultat", "Details", new { id = item.QuizzId }, new { @class = "btn btn-primary" })
-            </td>
+				@Html.ActionLink("Voir le résultat", "Details", new { id = item.QuizzId }, new { @class = "btn btn-primary" })			
+
+			</td>
 		</tr>
 	}
 

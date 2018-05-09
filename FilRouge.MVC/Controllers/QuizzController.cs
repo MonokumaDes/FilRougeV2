@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using FilRouge.MVC.Entities;
@@ -8,6 +13,7 @@ using FilRouge.MVC.Models;
 using FilRouge.MVC.Services;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.ViewModels.Maps;
+using Rotativa;
 
 namespace FilRouge.MVC.Controllers
 {
@@ -222,5 +228,53 @@ namespace FilRouge.MVC.Controllers
             return View(quizz);
         }
 
-    }
+	
+		public ActionResult ResultatToPDF(int Quizzid)
+		{
+			return new Rotativa.ActionAsPdf("Details", new { id = Quizzid });
+		}
+
+		public ActionResult ResultatSendtoPDF(int Quizzid)
+		{
+			var pdf = new ActionAsPdf("Details", new { id = Quizzid });
+			var binary  = pdf.BuildPdf(ControllerContext);
+
+			var quizz = _quizzService.GetQuizz(Quizzid);
+			
+			var contact = _contactService.GetContactById(quizz.ContactId);
+
+			string from = "projetFilRouge@m2i.com";
+			string to = contact.Email;
+
+			MailMessage message = new MailMessage(from, to);
+
+			message.Subject = "resultat du test de " + contact.Name + contact.UserName;
+			message.SubjectEncoding = Encoding.UTF8;
+			message.Body = "Bonjour,vous trouverez ci-joint le résultat de votre quizz en PJ.";
+			message.IsBodyHtml = true;
+
+			MemoryStream file = new MemoryStream(binary);
+
+			file.Seek(0, SeekOrigin.Begin);
+
+			Attachment data = new Attachment(file, "Resultat", "application/pdf");
+			ContentDisposition disposition = data.ContentDisposition;
+			disposition.CreationDate = DateTime.Now;
+			disposition.ModificationDate = DateTime.Now;
+			disposition.DispositionType = DispositionTypeNames.Attachment;
+
+			message.Attachments.Add(data);
+
+			SmtpClient smtpMail = new SmtpClient();
+			smtpMail.Credentials = new System.Net.NetworkCredential("ibrahimm2iformation@gmail.com", "Admin:2018");
+			smtpMail.Host = "smtp.gmail.com";
+			smtpMail.Port = 587;
+			smtpMail.EnableSsl = true;
+
+			smtpMail.Send(message);
+
+
+			return RedirectToAction ("Details", new { id = Quizzid });
+		}
+	}
 }
